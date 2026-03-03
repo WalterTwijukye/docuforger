@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useAuth, CustomProfile } from "@/components/AuthProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { databases, DATABASE_ID, COL_USAGE, COL_TEMPLATES, COL_DOCUMENTS } from "@/lib/appwrite";
 import { Query, ID } from "appwrite";
 import { STANDARD_TEMPLATES } from "@/lib/standard-templates";
 
-export default function DashboardPage() {
+function DashboardContent() {
     const { user, profile } = useAuth();
     const router = useRouter();
     const pathname = usePathname();
@@ -334,5 +334,17 @@ export default function DashboardPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function DashboardPage() {
+    return (
+        <Suspense fallback={
+            <div className="flex-1 p-6 lg:p-10 flex items-center justify-center">
+                <div className="text-slate-500 font-medium">Loading Dashboard...</div>
+            </div>
+        }>
+            <DashboardContent />
+        </Suspense>
     );
 }
