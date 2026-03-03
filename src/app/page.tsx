@@ -1,65 +1,308 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* Navigation */}
+      <header className="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-primary text-3xl">description</span>
+            <span className="text-xl font-bold tracking-tight">DocuForge</span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-8">
+            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#features">Features</Link>
+            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#pricing">Pricing</Link>
+            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#">Resources</Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="hidden sm:block text-sm font-bold px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">Log In</Link>
+            <Link href="/signup" className="bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity">Get Started</Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="px-6 py-16 md:py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-4">
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit">
+                  New: AI-Powered Templates
+                </span>
+                <h1 className="text-5xl md:text-6xl font-black leading-tight tracking-tight text-balance">
+                  Automate Your Documents in <span className="text-primary">Seconds</span>
+                </h1>
+                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-lg">
+                  Stop manual copy-pasting. Generate professional PDFs and Word documents in under 30 seconds with our powerful automation engine.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/signup" className="flex items-center justify-center bg-primary text-white text-lg font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+                  Get Started for Free
+                </Link>
+                <button className="flex items-center justify-center gap-2 border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <span className="material-symbols-outlined">play_circle</span>
+                  See how it works
+                </button>
+              </div>
+              <div className="flex items-center gap-4 text-sm text-slate-500">
+                <div className="flex -space-x-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" alt="User testimonial avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwglKMUxzGa69Vx2vvB6fdtrT93S0sPD_KDlfVl8alBVwJJDHpr5xJoOO82Tq1aWB4KE_MmfayhZUdxAVbUaYFnUmrH9LCMvKJABUdXnUi6l24l48YFHKym43-PxAvkQB4MNIjorXk8KASqvhWK3thg0JU28c-MQYdqi0k8c9iNaK8kPpc9qvRxdX51WjubjMrnj15rXcuPjsZANZ2FigkUWqVcPBlMKP23VUM-mvJH1mkqt6nQz6xp2GZBKKIcZpbWucqprWRgI02" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" alt="User testimonial avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8fAB_cxYtkUqpVXhakbTHcQUDOpeCYLj_mVnKh8rIVAwzqfYaFk9nGtExh52iTxDhbbiNLQ7DQo-m5IQgpQtj9_zWGxivBUXucoCK6aj1n1QGwFBXILKjDTpmacBqraXwJbC2HBkTFzeTMpjtM_Xr4VMk-avi38tUaF7fu1Q8yV2QRUW924JwxOdixparQ9IYzFlNKkx9yV5ps_D7FIenbGRZOGzKbLYg5lJTNmVtnrMKDglL91XdYzoYOhjs2RtzZ6kw3X4Qo6_N" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" alt="User testimonial avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClDhnUvw089R99iEIAYFg7lguwBdkG-rywVj91hefz1Uj0gZXeiM-iTB1aiAOm2ylPeJFcXItPGAJ10AVW5WJjMBCxxTQAK4WA7o2BgBKdBU7GM63u8_tlPMg7Cdscx1BumDGF7CwB9JwEuq75ODVyyc9NRl3GqjLE5lzWlLZnP6Zg7rlkv9CH0SfPxyqmvW-zn4UUmrZEkbDnnmETkHVky0H7um6MJjasFMaHwH9vgHPydNwl-TaPi1OwDZiBiM8N8J58RG4RHX97" />
+                </div>
+                <span>Trusted by 5,000+ companies worldwide</span>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full"></div>
+              <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="w-full h-auto rounded-xl" alt="SaaS dashboard showing document automation workflow and template preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsCDPn8705G8_-PCGcyyfk4J_eVh8uUMNlmFXMNeSSt9_ikmvgWV1qErRi--UE3MzCZN5uMVX-0Hm0dfMfJ7tsvk3YzysABuJw5x3JvwlGivlam70VeNszwbphzw56GOY107M9DUqvD5lEIeMxas0VVccVswQ34j7eD_nw2raDRxchI1t0kv3nYOov2mlDmTPLsH374oad7KpJcPJ1Xkd3161AHqE8HNQdSW-XqkDFwIiA-60WtWKqte4bCQkqU-DVTiPWJtzUKdeg" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Value Propositions */}
+        <section className="bg-white dark:bg-slate-900/50 py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div className="flex flex-col gap-4">
+                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-primary text-2xl">bolt</span>
+                </div>
+                <h3 className="text-xl font-bold">No Training Required</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Our intuitive drag-and-drop interface is designed for humans. Get up and running in minutes, not days.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-primary text-2xl">article</span>
+                </div>
+                <h3 className="text-xl font-bold">Professional PDFs &amp; Word</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Export high-fidelity documents that look perfect every time. Support for complex layouts and custom branding.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-primary text-2xl">shield</span>
+                </div>
+                <h3 className="text-xl font-bold">Secure Storage</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Enterprise-grade SOC2 compliance and end-to-end encryption. Your sensitive data is always protected.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-24 px-6" id="features">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-16 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Powerful Features for Modern Teams</h2>
+              <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                Everything you need to streamline your document workflow and eliminate repetitive manual tasks.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="flex flex-col gap-6">
+                <div className="group p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all">
+                  <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary">dynamic_form</span>
+                    Template Variables
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Create dynamic templates using simple tags like <code className="bg-primary/10 text-primary px-1 rounded">{`{{client_name}}`}</code> or <code className="bg-primary/10 text-primary px-1 rounded">{`{{invoice_total}}`}</code>.
+                  </p>
+                </div>
+                <div className="group p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all">
+                  <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary">edit_note</span>
+                    Easy Form Filling
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Turn any document into a smart form. Collect data from clients and automatically populate your templates without lifting a finger.
+                  </p>
+                </div>
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="w-full h-auto aspect-video object-cover" alt="Visual representation of document variables and form field mapping interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDzl3RoYeHgzCfjdmLIlLg3YI1kp7WGv3doJkQOvjJr8n08FfqXPBEO0-FiIy48moYHEbMfA3c2fBIC4E3OLTHVw_bSPi5HBEBWvSdHuP3coelvy-cpOHJe2GePT9QSd4wtYBfFDa6NJUllYin4ab7kPmiBN-UlyW5UrsZMv5wfJiaoD1l_PRXUtyNOVKiHH8tTABFY62fxPYn2-Q2tYV4iIMAK1j3HJpLEWKgUvZs-5a1JaRVPgqXf136CsY3eengxF2cTjwkdUYg" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section className="py-24 bg-white dark:bg-slate-900/50 px-6" id="pricing">
+          <div className="mx-auto max-w-7xl">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Simple, Transparent Pricing</h2>
+              <p className="text-slate-600 dark:text-slate-400">Choose the plan that fits your growth.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-8">
+              {/* Free Plan */}
+              <div className="flex flex-col p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark">
+                <h3 className="text-xl font-bold mb-2">Free</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black">$0</span>
+                  <span className="text-slate-500">/mo</span>
+                </div>
+                <ul className="flex flex-col gap-4 mb-8 flex-grow">
+                  <li className="flex items-center gap-2 text-sm">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    3 documents per month
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-slate-500">
+                    <span className="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">check_circle</span>
+                    Standard templates
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-slate-500">
+                    <span className="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">check_circle</span>
+                    Email support
+                  </li>
+                </ul>
+                <Link href="/signup" className="flex items-center justify-center w-full py-3 rounded-lg font-bold border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">Start for Free</Link>
+              </div>
+
+              {/* Pro Plan */}
+              <div className="flex flex-col p-8 rounded-2xl border-2 border-primary bg-white dark:bg-slate-900 relative shadow-xl">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold uppercase tracking-widest px-4 py-1 rounded-full">Most Popular</div>
+                <h3 className="text-xl font-bold mb-2 text-primary">Pro</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black">$7</span>
+                  <span className="text-slate-500">/mo</span>
+                </div>
+                <ul className="flex flex-col gap-4 mb-8 flex-grow">
+                  <li className="flex items-center gap-2 text-sm font-medium">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Unlimited documents
+                  </li>
+                  <li className="flex items-center gap-2 text-sm font-medium">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Custom branding
+                  </li>
+                  <li className="flex items-center gap-2 text-sm font-medium">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Priority email support
+                  </li>
+                  <li className="flex items-center gap-2 text-sm font-medium">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Form filling automation
+                  </li>
+                </ul>
+                <Link href="/signup?intent=pro" className="flex items-center justify-center w-full py-3 rounded-lg font-bold bg-primary text-white hover:opacity-90 transition-opacity">Go Pro</Link>
+              </div>
+
+              {/* Business Plan - Temporarily Disabled 
+              <div className="flex flex-col p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark">
+                <h3 className="text-xl font-bold mb-2">Business</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black">$29</span>
+                  <span className="text-slate-500">/mo</span>
+                </div>
+                <ul className="flex flex-col gap-4 mb-8 flex-grow">
+                  <li className="flex items-center gap-2 text-sm">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Everything in Pro
+                  </li>
+                  <li className="flex items-center gap-2 text-sm">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Team collaboration (5 seats)
+                  </li>
+                  <li className="flex items-center gap-2 text-sm">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    API Access
+                  </li>
+                  <li className="flex items-center gap-2 text-sm">
+                    <span className="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    Dedicated account manager
+                  </li>
+                </ul>
+                <button className="w-full py-3 rounded-lg font-bold border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">Contact Sales</button>
+              </div>
+              */}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Final */}
+        <section className="py-24 px-6 text-center shadow-inner">
+          <div className="mx-auto max-w-4xl bg-primary rounded-3xl p-12 md:p-20 text-white shadow-2xl shadow-primary/30">
+            <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">Ready to reclaim your time?</h2>
+            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+              Join thousands of professionals who have automated their document workflows with DocuForge.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/signup" className="flex items-center justify-center bg-white text-primary text-lg font-bold px-10 py-4 rounded-xl hover:bg-slate-100 transition-colors">
+                Start Free Trial
+              </Link>
+              <Link href="/signup" className="flex items-center justify-center border border-white/30 bg-white/10 backdrop-blur-sm text-white text-lg font-bold px-10 py-4 rounded-xl hover:bg-white/20 transition-colors">
+                Schedule Demo
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark py-12 px-6">
+        <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-12">
+          <div className="col-span-2 lg:col-span-2">
+            <div className="flex items-center gap-2 mb-6">
+              <span className="material-symbols-outlined text-primary text-3xl">description</span>
+              <span className="text-xl font-bold tracking-tight">DocuForge</span>
+            </div>
+            <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
+              Modern document automation for high-growth teams. Spend less time formatting, and more time growing.
+            </p>
+          </div>
+          <div>
+            <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Product</h5>
+            <ul className="flex flex-col gap-3 text-sm text-slate-500">
+              <li><Link className="hover:text-primary transition-colors" href="#features">Features</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="#pricing">Pricing</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="#">Changelog</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Company</h5>
+            <ul className="flex flex-col gap-3 text-sm text-slate-500">
+              <li><Link className="hover:text-primary transition-colors" href="#">About Us</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="#">Contact</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="#">Privacy</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Support</h5>
+            <ul className="flex flex-col gap-3 text-sm text-slate-500">
+              <li><Link className="hover:text-primary transition-colors" href="#">Help Center</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="#">API Reference</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="#">Status</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="mx-auto max-w-7xl pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-slate-500">© 2024 DocuForge Inc. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link className="text-slate-500 hover:text-primary transition-colors" href="#">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+            </Link>
+            <Link className="text-slate-500 hover:text-primary transition-colors" href="#">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
