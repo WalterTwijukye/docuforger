@@ -17,14 +17,14 @@ export default function TermsOfServicePage() {
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">1. Acceptance of Terms</h2>
                         <p>
-                            By accessing or using the DocuForge service, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.
+                            By accessing or using the DocuForger service, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.
                         </p>
                     </section>
 
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">2. Description of Service</h2>
                         <p>
-                            DocuForge is a document automation and generation platform. We provide software tools allowing users to create templates, fill out forms, and generate PDF documents. We reserve the right to modify or discontinue the service at any time.
+                            DocuForger is a document automation and generation platform. We provide software tools allowing users to create templates, fill out forms, and generate PDF documents. We reserve the right to modify or discontinue the service at any time.
                         </p>
                     </section>
 
@@ -45,14 +45,14 @@ export default function TermsOfServicePage() {
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">5. Intellectual Property</h2>
                         <p>
-                            The Service and its original content, features, and functionality are and will remain the exclusive property of DocuForge and its licensors. However, you retain all rights to the documents and content you generate using the service.
+                            The Service and its original content, features, and functionality are and will remain the exclusive property of DocuForger and its licensors. However, you retain all rights to the documents and content you generate using the service.
                         </p>
                     </section>
 
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">6. Limitation of Liability</h2>
                         <p>
-                            In no event shall DocuForge, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages resulting from your access to or use of the service.
+                            In no event shall DocuForger, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages resulting from your access to or use of the service.
                         </p>
                     </section>
                 </div>

@@ -24,7 +24,7 @@ export default function DashboardLayout({
                         <div className="bg-primary rounded-lg p-1 text-white">
                             <span className="material-symbols-outlined text-sm">description</span>
                         </div>
-                        <h1 className="text-slate-900 dark:text-white font-bold text-base leading-none">DocuForge</h1>
+                        <h1 className="text-slate-900 dark:text-white font-bold text-base leading-none">DocuForger</h1>
                     </div>
                     <button className="text-slate-500 hover:text-slate-900 dark:hover:text-white">
                         <span className="material-symbols-outlined">menu</span>

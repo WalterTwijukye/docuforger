@@ -41,8 +41,8 @@ export async function getCheckoutUrl(plan: string, userId: string, userEmail: st
             productOptions: {
                 enabledVariants: [parseInt(variantId)],
                 redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/billing?status=success`,
-                receiptButtonText: 'Return to DocuForge',
-                receiptThankYouNote: 'Thank you for upgrading to DocuForge!'
+                receiptButtonText: 'Return to DocuForger',
+                receiptThankYouNote: 'Thank you for upgrading to DocuForger!'
             }
         });
 

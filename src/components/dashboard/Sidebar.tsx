@@ -24,7 +24,7 @@ export default function Sidebar() {
                     <span className="material-symbols-outlined block">description</span>
                 </div>
                 <div>
-                    <h1 className="text-slate-900 dark:text-white font-bold text-lg leading-none">DocuForge</h1>
+                    <h1 className="text-slate-900 dark:text-white font-bold text-lg leading-none">DocuForger</h1>
                     <p className="text-slate-500 dark:text-slate-400 text-xs font-medium">Pro Workspace</p>
                 </div>
             </div>

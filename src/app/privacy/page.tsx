@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">1. Information We Collect</h2>
                         <p className="mb-4">
-                            When you use DocuForge, we collect information that you provide securely to us, including:
+                            When you use DocuForger, we collect information that you provide securely to us, including:
                         </p>
                         <ul className="list-disc pl-6 space-y-2">
                             <li><strong>Account Information:</strong> Your name and email address when you register using Google OAuth or email.</li>
@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">2. How We Use Your Information</h2>
                         <p className="mb-4">We use the information we collect to:</p>
                         <ul className="list-disc pl-6 space-y-2">
-                            <li>Provide, maintain, and improve the DocuForge service.</li>
+                            <li>Provide, maintain, and improve the DocuForger service.</li>
                             <li>Process transactions and send related billing information.</li>
                             <li>Authenticate your identity when you log in.</li>
                             <li>Respond to your comments, questions, and customer service requests.</li>
@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">3. Third-Party Authentication (Google OAuth)</h2>
                         <p>
-                            DocuForge allows you to sign up and log in using your Google account. We only request basic profile information (your name and verified email address) from Google to create your account and verify your identity. We do not access your contacts, Google Drive files, or any other private Google data.
+                            DocuForger allows you to sign up and log in using your Google account. We only request basic profile information (your name and verified email address) from Google to create your account and verify your identity. We do not access your contacts, Google Drive files, or any other private Google data.
                         </p>
                     </section>
 

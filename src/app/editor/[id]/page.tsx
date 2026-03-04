@@ -124,7 +124,7 @@ export default function TemplateEditorPage() {
                 <div className="p-4 md:p-6 flex justify-center md:justify-start">
                     <Link href="/dashboard" className="flex items-center gap-2 text-primary mb-1">
                         <span className="material-symbols-outlined text-3xl font-bold">description</span>
-                        <h1 className="text-xl font-bold tracking-tight hidden md:block text-slate-900 dark:text-white">DocuForge</h1>
+                        <h1 className="text-xl font-bold tracking-tight hidden md:block text-slate-900 dark:text-white">DocuForger</h1>
                     </Link>
                 </div>
 

@@ -9,7 +9,7 @@ export default function ResetPasswordSuccessPage() {
                     <div className="bg-primary p-1.5 rounded-lg flex items-center justify-center">
                         <span className="material-symbols-outlined text-white text-xl">description</span>
                     </div>
-                    <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">DocuForge</h1>
+                    <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">DocuForger</h1>
                 </Link>
             </header>
 
@@ -42,7 +42,7 @@ export default function ResetPasswordSuccessPage() {
             </main>
 
             <footer className="w-full py-6 text-center text-slate-400 dark:text-slate-500 text-sm border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-background-dark/30">
-                <p>© 2024 DocuForge Inc. All rights reserved.</p>
+                <p>© 2024 DocuForger Inc. All rights reserved.</p>
             </footer>
         </div>
     );

@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LandingPage() {
+  const [showContactModal, setShowContactModal] = useState(false);
+
   return (
     <>
       {/* Navigation */}
@@ -254,6 +257,41 @@ export default function LandingPage() {
         </section>
       </main>
 
+      {/* Contact Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-xl font-bold">Contact Us</h3>
+              <button onClick={() => setShowContactModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+
+            <div className="p-6">
+              <p className="text-sm text-slate-500 mb-6 font-medium">
+                Need immediate assistance? Call us directly: <a href="tel:+256778512260" className="text-primary font-bold hover:underline">+256 778 512 260</a>
+              </p>
+
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setShowContactModal(false); alert("Inquiry sent successfully!"); }}>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5 ml-1">Subject</label>
+                  <input required placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5 ml-1">Body</label>
+                  <textarea required rows={4} placeholder="Tell us more about your inquiry..." className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 resize-none"></textarea>
+                </div>
+
+                <button type="submit" className="w-full py-3 mt-2 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity">
+                  Send Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <footer className="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark py-12 px-6">
         <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-12">
@@ -278,34 +316,11 @@ export default function LandingPage() {
             <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Company</h5>
             <ul className="flex flex-col gap-3 text-sm text-slate-500">
               <li><Link className="hover:text-primary transition-colors" href="#">About Us</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Contact</Link></li>
+              <li><button onClick={() => setShowContactModal(true)} className="hover:text-primary transition-colors text-left">Contact Us</button></li>
             </ul>
           </div>
           <div>
             <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Legal</h5>
-            <ul className="flex flex-col gap-3 text-sm text-slate-500">
-              <li><Link className="hover:text-primary transition-colors" href="/privacy">Privacy Policy</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/terms">Terms of Service</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Support</h5>
-            <ul className="flex flex-col gap-3 text-sm text-slate-500">
-              <li><Link className="hover:text-primary transition-colors" href="#">Help Center</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">API Reference</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Status</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="mx-auto max-w-7xl pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-500">© 2024 DocuForge Inc. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link className="text-slate-500 hover:text-primary transition-colors" href="#">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
-            </Link>
-            <Link className="text-slate-500 hover:text-primary transition-colors" href="#">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-            </Link>
           </div>
         </div>
       </footer>

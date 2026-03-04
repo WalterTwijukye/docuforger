@@ -11,7 +11,7 @@ export default function ForgotPasswordPage() {
                             <div className="p-2 bg-primary rounded-lg text-white">
                                 <span className="material-symbols-outlined text-3xl">description</span>
                             </div>
-                            <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">DocuForge</h1>
+                            <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">DocuForger</h1>
                         </Link>
                         <p className="text-slate-500 dark:text-slate-400 text-center">Reset your password to regain access.</p>
                     </div>

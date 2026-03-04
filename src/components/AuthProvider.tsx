@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
 
-    const isPublicRoute = ["/", "/login", "/signup", "/forgot-password", "/reset-password"].includes(
+    const isPublicRoute = ["/", "/login", "/signup", "/forgot-password", "/reset-password", "/privacy", "/terms"].includes(
         pathname || ""
     );
 
