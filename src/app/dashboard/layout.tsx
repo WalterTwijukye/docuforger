@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Sidebar from "@/components/dashboard/Sidebar";
 
 export const metadata: Metadata = {
-    title: "Dashboard | DocuForge",
-    description: "Manage your documents and templates in DocuForge.",
+    title: "Dashboard | DocuForger",
+    description: "Manage your documents and templates in DocuForger",
 };
 
 export default function DashboardLayout({

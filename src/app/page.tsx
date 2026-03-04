@@ -13,7 +13,7 @@ export default function LandingPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary text-3xl">description</span>
-            <span className="text-xl font-bold tracking-tight">DocuForge</span>
+            <span className="text-xl font-bold tracking-tight">DocuForger</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link className="text-sm font-medium hover:text-primary transition-colors" href="#features">Features</Link>
@@ -245,7 +245,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-4xl bg-primary rounded-3xl p-12 md:p-20 text-white shadow-2xl shadow-primary/30">
             <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">Ready to reclaim your time?</h2>
             <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-              Join thousands of professionals who have automated their document workflows with DocuForge.
+              Join thousands of professionals who have automated their document workflows with DocuForger.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/signup" className="flex items-center justify-center bg-white text-primary text-lg font-bold px-10 py-4 rounded-xl hover:bg-slate-100 transition-colors">
@@ -300,7 +300,7 @@ export default function LandingPage() {
           <div className="col-span-2 lg:col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <span className="material-symbols-outlined text-primary text-3xl">description</span>
-              <span className="text-xl font-bold tracking-tight">DocuForge</span>
+              <span className="text-xl font-bold tracking-tight">DocuForger</span>
             </div>
             <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
               Modern document automation for high-growth teams. Spend less time formatting, and more time growing.

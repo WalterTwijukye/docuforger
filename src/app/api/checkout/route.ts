@@ -36,7 +36,7 @@ export async function POST(request: Request) {
             productOptions: {
                 redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?checkout=success`,
                 receiptButtonText: 'Go to Dashboard',
-                receiptThankYouNote: 'Thank you for upgrading to DocuForge Pro!'
+                receiptThankYouNote: 'Thank you for upgrading to DocuForger Pro!'
             }
         });
 
