@@ -272,7 +272,7 @@ export default function LandingPage() {
 
             <div className="p-6">
               <p className="text-sm text-slate-500 mb-6 font-medium">
-                Need immediate assistance? Call us directly: <a href="tel:+256778512260" className="text-primary font-bold hover:underline">+256 778 512 260</a>
+                Need assistance? Call us directly: <a href="tel:+256778512260" className="text-primary font-bold hover:underline">+256 778 512 260</a>
               </p>
 
               <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setShowContactModal(false); alert("Inquiry sent successfully!"); }}>
@@ -323,7 +323,14 @@ export default function LandingPage() {
           </div>
           <div>
             <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Legal</h5>
+            <ul className="flex flex-col gap-3 text-sm text-slate-500">
+              <li><Link className="hover:text-primary transition-colors" href="/privacy">Privacy Policy</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/terms">Terms of Service</Link></li>
+            </ul>
           </div>
+        </div>
+        <div className="mx-auto max-w-7xl pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-slate-500">&copy; {new Date().getFullYear()} DocuForger. All rights reserved.</p>
         </div>
       </footer>
     </>
