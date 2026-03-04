@@ -279,7 +279,13 @@ export default function LandingPage() {
             <ul className="flex flex-col gap-3 text-sm text-slate-500">
               <li><Link className="hover:text-primary transition-colors" href="#">About Us</Link></li>
               <li><Link className="hover:text-primary transition-colors" href="#">Contact</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Privacy</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-bold mb-4 text-sm uppercase tracking-wider">Legal</h5>
+            <ul className="flex flex-col gap-3 text-sm text-slate-500">
+              <li><Link className="hover:text-primary transition-colors" href="/privacy">Privacy Policy</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/terms">Terms of Service</Link></li>
             </ul>
           </div>
           <div>

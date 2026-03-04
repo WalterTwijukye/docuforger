@@ -11,6 +11,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "DocuForge | Automate Your Documents in Seconds",
   description: "Stop manual copy-pasting. Generate professional PDFs and Word documents in under 30 seconds with our powerful automation engine.",
+  verification: {
+    google: "RZklUDpRhCbwQ8td7n8XVrR-d_WY0TZsJCBTlRcAqC0",
+  },
 };
 
 export default function RootLayout({
