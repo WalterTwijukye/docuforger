@@ -1,6 +1,7 @@
 "use client";
 
 import { jsPDF } from "jspdf";
+import { Document, Packer, Paragraph, TextRun } from "docx";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -18,6 +19,7 @@ export default function GenerateDocumentPage() {
     const [variables, setVariables] = useState<any[]>([]);
     const [formData, setFormData] = useState<Record<string, string>>({});
     const [documentTitle, setDocumentTitle] = useState("");
+    const [outputFormat, setOutputFormat] = useState<'pdf' | 'docx'>('pdf');
 
     const [isLoading, setIsLoading] = useState(true);
     const [isGenerating, setIsGenerating] = useState(false);
@@ -93,18 +95,26 @@ export default function GenerateDocumentPage() {
                 generatedContent = generatedContent.replace(regex, value);
             });
 
-            // 2. Generate a real PDF using jsPDF
-            const doc = new jsPDF();
+            let file: File;
 
-            // Simple text wrapping for the content (180mm width)
-            const margin = 15;
-            const maxLineWidth = 180;
-            const textLines = doc.splitTextToSize(generatedContent, maxLineWidth);
-            doc.text(textLines, margin, margin + 10);
-
-            // Get Blob and create File
-            const pdfBlob = doc.output('blob');
-            const file = new File([pdfBlob], `${template.name.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.pdf`, { type: 'application/pdf' });
+            if (outputFormat === 'pdf') {
+                const doc = new jsPDF();
+                const margin = 15;
+                const maxLineWidth = 180;
+                const textLines = doc.splitTextToSize(generatedContent, maxLineWidth);
+                doc.text(textLines, margin, margin + 10);
+                const pdfBlob = doc.output('blob');
+                file = new File([pdfBlob], `${template.name.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.pdf`, { type: 'application/pdf' });
+            } else {
+                const doc = new Document({
+                    sections: [{
+                        properties: {},
+                        children: generatedContent.split('\n').map((text: string) => new Paragraph({ text })),
+                    }],
+                });
+                const blob = await Packer.toBlob(doc);
+                file = new File([blob], `${template.name.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.docx`, { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            }
 
             // 3. Upload to Appwrite Storage
             const uploadRes = await storage.createFile(BUCKET_DOCUMENTS, ID.unique(), file);
@@ -217,6 +227,19 @@ export default function GenerateDocumentPage() {
                                             placeholder={`Enter document name...`}
                                         />
                                     </div>
+                                    <div className="space-y-2 pb-6 mb-2 border-b border-slate-100 dark:border-slate-800">
+                                        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1 flex items-center justify-between">
+                                            <span>Output Format</span>
+                                        </label>
+                                        <select
+                                            value={outputFormat}
+                                            onChange={(e) => setOutputFormat(e.target.value as 'pdf' | 'docx')}
+                                            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                                        >
+                                            <option value="pdf">PDF Document (.pdf)</option>
+                                            <option value="docx">Word Document (.docx)</option>
+                                        </select>
+                                    </div>
                                     {variables.map((v) => (
                                         <div key={v.name} className="space-y-2">
                                             <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1 flex items-center justify-between">
@@ -246,7 +269,7 @@ export default function GenerateDocumentPage() {
                                     className={`px-6 py-2.5 text-sm font-semibold text-white rounded-xl shadow-md flex items-center gap-2 transition-all ${isGenerating ? 'bg-primary/70 cursor-not-allowed' : 'bg-primary hover:bg-primary/90'}`}
                                 >
                                     <span className="material-symbols-outlined text-lg">{isGenerating ? 'sync' : 'play_arrow'}</span>
-                                    {isGenerating ? 'Generating...' : 'Generate Now'}
+                                    {isGenerating ? 'Generating...' : `Generate ${outputFormat.toUpperCase()}`}
                                 </button>
                             </div>
                         </form>

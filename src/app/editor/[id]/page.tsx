@@ -141,6 +141,14 @@ export default function TemplateEditorPage() {
                         <span className="material-symbols-outlined">folder</span>
                         <span className="text-sm font-medium hidden md:block">Documents</span>
                     </Link>
+                    <Link href="/dashboard/billing" className="flex items-center justify-center md:justify-start gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                        <span className="material-symbols-outlined">credit_card</span>
+                        <span className="text-sm font-medium hidden md:block">Billing</span>
+                    </Link>
+                    <Link href="/dashboard/settings" className="flex items-center justify-center md:justify-start gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                        <span className="material-symbols-outlined">settings</span>
+                        <span className="text-sm font-medium hidden md:block">Settings</span>
+                    </Link>
                 </nav>
 
                 <div className="p-4 border-t border-slate-200 dark:border-slate-800">

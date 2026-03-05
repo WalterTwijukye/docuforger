@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function LandingPage() {
   const [showContactModal, setShowContactModal] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   return (
     <>
@@ -47,8 +48,8 @@ export default function LandingPage() {
                 <Link href="/signup" className="flex items-center justify-center bg-primary text-white text-lg font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20">
                   Get Started for Free
                 </Link>
-                <button className="flex items-center justify-center gap-2 border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                  <span className="material-symbols-outlined">play_circle</span>
+                <button onClick={() => setShowVideoModal(true)} className="flex items-center justify-center gap-2 border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <span className="material-symbols-outlined text-primary">play_circle</span>
                   See how it works
                 </button>
               </div>
@@ -67,8 +68,7 @@ export default function LandingPage() {
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full"></div>
               <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 shadow-2xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="w-full h-auto rounded-xl" alt="SaaS dashboard showing document automation workflow and template preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsCDPn8705G8_-PCGcyyfk4J_eVh8uUMNlmFXMNeSSt9_ikmvgWV1qErRi--UE3MzCZN5uMVX-0Hm0dfMfJ7tsvk3YzysABuJw5x3JvwlGivlam70VeNszwbphzw56GOY107M9DUqvD5lEIeMxas0VVccVswQ34j7eD_nw2raDRxchI1t0kv3nYOov2mlDmTPLsH374oad7KpJcPJ1Xkd3161AHqE8HNQdSW-XqkDFwIiA-60WtWKqte4bCQkqU-DVTiPWJtzUKdeg" />
+                <img className="w-full h-auto rounded-xl object-cover object-top" alt="DocuForger automatic document generation interface" src="/landing-page-1.png" />
               </div>
             </div>
           </div>
@@ -140,8 +140,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-white">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="w-full h-auto aspect-video object-cover" alt="Visual representation of document variables and form field mapping interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDzl3RoYeHgzCfjdmLIlLg3YI1kp7WGv3doJkQOvjJr8n08FfqXPBEO0-FiIy48moYHEbMfA3c2fBIC4E3OLTHVw_bSPi5HBEBWvSdHuP3coelvy-cpOHJe2GePT9QSd4wtYBfFDa6NJUllYin4ab7kPmiBN-UlyW5UrsZMv5wfJiaoD1l_PRXUtyNOVKiHH8tTABFY62fxPYn2-Q2tYV4iIMAK1j3HJpLEWKgUvZs-5a1JaRVPgqXf136CsY3eengxF2cTjwkdUYg" />
+                <img className="w-full h-auto aspect-video object-cover object-left-top" alt="Visual representation of document variables and form field mapping interface" src="/landing-page-2.png" />
               </div>
             </div>
           </div>
@@ -258,6 +257,30 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
+
+      {/* Video Modal */}
+      {showVideoModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-4xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col items-center relative animate-in zoom-in-95 duration-200">
+            <button
+              onClick={() => setShowVideoModal(false)}
+              className="absolute top-4 right-4 flex items-center justify-center size-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors z-10"
+            >
+              <span className="material-symbols-outlined text-lg">close</span>
+            </button>
+            <div className="w-full aspect-video bg-black flex items-center justify-center relative">
+              <video
+                controls
+                autoPlay
+                className="w-full h-full object-contain"
+                src="/videoplayback (2).mp4"
+              >
+                Your browser does not support the video element.
+              </video>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Contact Modal */}
       {showContactModal && (

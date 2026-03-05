@@ -12,6 +12,7 @@
     "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
     "appwrite": "^22.4.1",
     "crypto": "^1.0.1",
+    "docx": "^9.6.0",
     "jspdf": "^4.2.0",
     "next": "^15.2.6",
     "node-appwrite": "^22.1.2",
