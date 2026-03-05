@@ -6,6 +6,17 @@ import { useState } from "react";
 export default function LandingPage() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
+
+  // Form states
+  const [contactSubject, setContactSubject] = useState("");
+  const [contactBody, setContactBody] = useState("");
+  const [isSendingContact, setIsSendingContact] = useState(false);
+
+  const [demoName, setDemoName] = useState("");
+  const [demoEmail, setDemoEmail] = useState("");
+  const [demoCompany, setDemoCompany] = useState("");
+  const [isSendingDemo, setIsSendingDemo] = useState(false);
 
   return (
     <>
@@ -250,13 +261,79 @@ export default function LandingPage() {
               <Link href="/signup" className="flex items-center justify-center bg-white text-primary text-lg font-bold px-10 py-4 rounded-xl hover:bg-slate-100 transition-colors">
                 Start Free Trial
               </Link>
-              <Link href="/signup" className="flex items-center justify-center border border-white/30 bg-white/10 backdrop-blur-sm text-white text-lg font-bold px-10 py-4 rounded-xl hover:bg-white/20 transition-colors">
+              <button onClick={() => setShowDemoModal(true)} className="flex items-center justify-center border border-white/30 bg-white/10 backdrop-blur-sm text-white text-lg font-bold px-10 py-4 rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
                 Schedule Demo
-              </Link>
+              </button>
             </div>
           </div>
         </section>
       </main>
+
+      {/* Demo Modal */}
+      {showDemoModal && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200 dark:border-slate-800">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Schedule a Demo</h3>
+              <button onClick={() => setShowDemoModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+
+            <div className="p-6">
+              <p className="text-sm text-slate-500 mb-6 font-medium">
+                Let us show you how DocuForger can save your team hours of work every week.
+              </p>
+
+              <form className="space-y-4" onSubmit={async (e) => {
+                e.preventDefault();
+                setIsSendingDemo(true);
+                try {
+                  const res = await fetch(`${process.env.NEXT_PUBLIC_PROXY_URL}/emails`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      to: ["docuforger@gmail.com"],
+                      subject: `Demo Request from ${demoName} at ${demoCompany}`,
+                      html: `<strong>New Demo Request</strong><br/><br/><strong>Name:</strong> ${demoName}<br/><strong>Email:</strong> ${demoEmail}<br/><strong>Company:</strong> ${demoCompany}<br/>`
+                    })
+                  });
+                  if (res.ok) {
+                    setShowDemoModal(false);
+                    setDemoName("");
+                    setDemoEmail("");
+                    setDemoCompany("");
+                    alert("Demo request sent successfully! We will reach out shortly.");
+                  } else {
+                    alert("Failed to submit request. Please try again.");
+                  }
+                } catch (error) {
+                  alert("Failed to submit request.");
+                } finally {
+                  setIsSendingDemo(false);
+                }
+              }}>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Your Name</label>
+                  <input required value={demoName} onChange={e => setDemoName(e.target.value)} placeholder="Jane Doe" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Work Email</label>
+                  <input required type="email" value={demoEmail} onChange={e => setDemoEmail(e.target.value)} placeholder="jane@company.com" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Company Name</label>
+                  <input required value={demoCompany} onChange={e => setDemoCompany(e.target.value)} placeholder="Acme Corp" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                </div>
+
+                <button disabled={isSendingDemo} type="submit" className="w-full py-3 mt-4 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50">
+                  {isSendingDemo ? "Submitting..." : "Request Demo"}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Video Modal */}
       {showVideoModal && (
@@ -298,18 +375,44 @@ export default function LandingPage() {
                 Need assistance? Call us directly: <a href="tel:+256778512260" className="text-primary font-bold hover:underline">+256 778 512 260</a>
               </p>
 
-              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setShowContactModal(false); alert("Inquiry sent successfully!"); }}>
+              <form className="space-y-4" onSubmit={async (e) => {
+                e.preventDefault();
+                setIsSendingContact(true);
+                try {
+                  const res = await fetch(`${process.env.NEXT_PUBLIC_PROXY_URL}/emails`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      to: ["docuforger@gmail.com"],
+                      subject: `New Contact Inquiry: ${contactSubject}`,
+                      html: `<strong>From:</strong> A visitor<br/><strong>Subject:</strong> ${contactSubject}<br/><br/><strong>Message:</strong><br/>${contactBody}`
+                    })
+                  });
+                  if (res.ok) {
+                    setShowContactModal(false);
+                    setContactSubject("");
+                    setContactBody("");
+                    alert("Inquiry sent successfully!");
+                  } else {
+                    alert("Failed to send inquiry. Please try again.");
+                  }
+                } catch (error) {
+                  alert("Failed to send inquiry.");
+                } finally {
+                  setIsSendingContact(false);
+                }
+              }}>
                 <div>
                   <label className="block text-sm font-medium mb-1.5 ml-1">Subject</label>
-                  <input required placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" />
+                  <input required value={contactSubject} onChange={e => setContactSubject(e.target.value)} placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1.5 ml-1">Body</label>
-                  <textarea required rows={4} placeholder="Tell us more about your inquiry..." className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 resize-none"></textarea>
+                  <textarea required value={contactBody} onChange={e => setContactBody(e.target.value)} rows={4} placeholder="Tell us more about your inquiry..." className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 resize-none"></textarea>
                 </div>
 
-                <button type="submit" className="w-full py-3 mt-2 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity">
-                  Send Inquiry
+                <button disabled={isSendingContact} type="submit" className="w-full py-3 mt-2 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50">
+                  {isSendingContact ? "Sending..." : "Send Inquiry"}
                 </button>
               </form>
             </div>
