@@ -289,7 +289,8 @@ export default function LandingPage() {
                 e.preventDefault();
                 setIsSendingDemo(true);
                 try {
-                  const res = await fetch(`${process.env.NEXT_PUBLIC_PROXY_URL}/emails`, {
+                  const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || 'http://localhost:3010';
+                  const res = await fetch(`${proxyUrl}/emails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -379,7 +380,8 @@ export default function LandingPage() {
                 e.preventDefault();
                 setIsSendingContact(true);
                 try {
-                  const res = await fetch(`${process.env.NEXT_PUBLIC_PROXY_URL}/emails`, {
+                  const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || "http://localhost:3010";
+                  const res = await fetch(`${proxyUrl}/emails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
