@@ -64,17 +64,6 @@ export default function LandingPage() {
                   See how it works
                 </button>
               </div>
-              <div className="flex items-center gap-4 text-sm text-slate-500">
-                <div className="flex -space-x-2">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" alt="User testimonial avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwglKMUxzGa69Vx2vvB6fdtrT93S0sPD_KDlfVl8alBVwJJDHpr5xJoOO82Tq1aWB4KE_MmfayhZUdxAVbUaYFnUmrH9LCMvKJABUdXnUi6l24l48YFHKym43-PxAvkQB4MNIjorXk8KASqvhWK3thg0JU28c-MQYdqi0k8c9iNaK8kPpc9qvRxdX51WjubjMrnj15rXcuPjsZANZ2FigkUWqVcPBlMKP23VUM-mvJH1mkqt6nQz6xp2GZBKKIcZpbWucqprWRgI02" />
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" alt="User testimonial avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8fAB_cxYtkUqpVXhakbTHcQUDOpeCYLj_mVnKh8rIVAwzqfYaFk9nGtExh52iTxDhbbiNLQ7DQo-m5IQgpQtj9_zWGxivBUXucoCK6aj1n1QGwFBXILKjDTpmacBqraXwJbC2HBkTFzeTMpjtM_Xr4VMk-avi38tUaF7fu1Q8yV2QRUW924JwxOdixparQ9IYzFlNKkx9yV5ps_D7FIenbGRZOGzKbLYg5lJTNmVtnrMKDglL91XdYzoYOhjs2RtzZ6kw3X4Qo6_N" />
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" alt="User testimonial avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClDhnUvw089R99iEIAYFg7lguwBdkG-rywVj91hefz1Uj0gZXeiM-iTB1aiAOm2ylPeJFcXItPGAJ10AVW5WJjMBCxxTQAK4WA7o2BgBKdBU7GM63u8_tlPMg7Cdscx1BumDGF7CwB9JwEuq75ODVyyc9NRl3GqjLE5lzWlLZnP6Zg7rlkv9CH0SfPxyqmvW-zn4UUmrZEkbDnnmETkHVky0H7um6MJjasFMaHwH9vgHPydNwl-TaPi1OwDZiBiM8N8J58RG4RHX97" />
-                </div>
-                <span>Trusted by 5,000+ companies worldwide</span>
-              </div>
             </div>
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full"></div>
@@ -267,160 +256,166 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-      </main>
+      </main >
 
       {/* Demo Modal */}
-      {showDemoModal && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200 dark:border-slate-800">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100 dark:border-slate-800">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Schedule a Demo</h3>
-              <button onClick={() => setShowDemoModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
-                <span className="material-symbols-outlined">close</span>
-              </button>
-            </div>
-
-            <div className="p-6">
-              <p className="text-sm text-slate-500 mb-6 font-medium">
-                Let us show you how DocuForger can save your team hours of work every week.
-              </p>
-
-              <form className="space-y-4" onSubmit={async (e) => {
-                e.preventDefault();
-                setIsSendingDemo(true);
-                try {
-                  const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || 'http://localhost:3010';
-                  const res = await fetch(`${proxyUrl}/emails`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      to: ["docuforger@gmail.com"],
-                      subject: `Demo Request from ${demoName} at ${demoCompany}`,
-                      html: `<strong>New Demo Request</strong><br/><br/><strong>Name:</strong> ${demoName}<br/><strong>Email:</strong> ${demoEmail}<br/><strong>Company:</strong> ${demoCompany}<br/>`
-                    })
-                  });
-                  if (res.ok) {
-                    setShowDemoModal(false);
-                    setDemoName("");
-                    setDemoEmail("");
-                    setDemoCompany("");
-                    alert("Demo request sent successfully! We will reach out shortly.");
-                  } else {
-                    alert("Failed to submit request. Please try again.");
-                  }
-                } catch (error) {
-                  alert("Failed to submit request.");
-                } finally {
-                  setIsSendingDemo(false);
-                }
-              }}>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Your Name</label>
-                  <input required value={demoName} onChange={e => setDemoName(e.target.value)} placeholder="Jane Doe" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Work Email</label>
-                  <input required type="email" value={demoEmail} onChange={e => setDemoEmail(e.target.value)} placeholder="jane@company.com" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Company Name</label>
-                  <input required value={demoCompany} onChange={e => setDemoCompany(e.target.value)} placeholder="Acme Corp" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
-                </div>
-
-                <button disabled={isSendingDemo} type="submit" className="w-full py-3 mt-4 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50">
-                  {isSendingDemo ? "Submitting..." : "Request Demo"}
+      {
+        showDemoModal && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200 dark:border-slate-800">
+              <div className="flex justify-between items-center p-6 border-b border-slate-100 dark:border-slate-800">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">Schedule a Demo</h3>
+                <button onClick={() => setShowDemoModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+                  <span className="material-symbols-outlined">close</span>
                 </button>
-              </form>
+              </div>
+
+              <div className="p-6">
+                <p className="text-sm text-slate-500 mb-6 font-medium">
+                  Let us show you how DocuForger can save your team hours of work every week.
+                </p>
+
+                <form className="space-y-4" onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSendingDemo(true);
+                  try {
+                    const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || 'http://localhost:3010';
+                    const res = await fetch(`${proxyUrl}/emails`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_RESEND_API_KEY}` },
+                      body: JSON.stringify({
+                        to: ["docuforger@gmail.com"],
+                        subject: `Demo Request from ${demoName} at ${demoCompany}`,
+                        html: `<strong>New Demo Request</strong><br/><br/><strong>Name:</strong> ${demoName}<br/><strong>Email:</strong> ${demoEmail}<br/><strong>Company:</strong> ${demoCompany}<br/>`
+                      })
+                    });
+                    if (res.ok) {
+                      setShowDemoModal(false);
+                      setDemoName("");
+                      setDemoEmail("");
+                      setDemoCompany("");
+                      alert("Demo request sent successfully! We will reach out shortly.");
+                    } else {
+                      alert("Failed to submit request. Please try again.");
+                    }
+                  } catch (error) {
+                    alert("Failed to submit request.");
+                  } finally {
+                    setIsSendingDemo(false);
+                  }
+                }}>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Your Name</label>
+                    <input required value={demoName} onChange={e => setDemoName(e.target.value)} placeholder="Jane Doe" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Work Email</label>
+                    <input required type="email" value={demoEmail} onChange={e => setDemoEmail(e.target.value)} placeholder="jane@company.com" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Company Name</label>
+                    <input required value={demoCompany} onChange={e => setDemoCompany(e.target.value)} placeholder="Acme Corp" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                  </div>
+
+                  <button disabled={isSendingDemo} type="submit" className="w-full py-3 mt-4 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50">
+                    {isSendingDemo ? "Submitting..." : "Request Demo"}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Video Modal */}
-      {showVideoModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-4xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col items-center relative animate-in zoom-in-95 duration-200">
-            <button
-              onClick={() => setShowVideoModal(false)}
-              className="absolute top-4 right-4 flex items-center justify-center size-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors z-10"
-            >
-              <span className="material-symbols-outlined text-lg">close</span>
-            </button>
-            <div className="w-full aspect-video bg-black flex items-center justify-center relative">
-              <video
-                controls
-                autoPlay
-                className="w-full h-full object-contain"
-                src="/videoplayback (2).mp4"
+      {
+        showVideoModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-4xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col items-center relative animate-in zoom-in-95 duration-200">
+              <button
+                onClick={() => setShowVideoModal(false)}
+                className="absolute top-4 right-4 flex items-center justify-center size-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors z-10"
               >
-                Your browser does not support the video element.
-              </video>
+                <span className="material-symbols-outlined text-lg">close</span>
+              </button>
+              <div className="w-full aspect-video bg-black flex items-center justify-center relative">
+                <video
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                  src="/videoplayback (2).mp4"
+                >
+                  Your browser does not support the video element.
+                </video>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Contact Modal */}
-      {showContactModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100 dark:border-slate-800">
-              <h3 className="text-xl font-bold">Contact Us</h3>
-              <button onClick={() => setShowContactModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
-                <span className="material-symbols-outlined">close</span>
-              </button>
-            </div>
-
-            <div className="p-6">
-              <p className="text-sm text-slate-500 mb-6 font-medium">
-                Need assistance? Call us directly: <a href="tel:+256778512260" className="text-primary font-bold hover:underline">+256 778 512 260</a>
-              </p>
-
-              <form className="space-y-4" onSubmit={async (e) => {
-                e.preventDefault();
-                setIsSendingContact(true);
-                try {
-                  const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || "http://localhost:3010";
-                  const res = await fetch(`${proxyUrl}/emails`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      to: ["docuforger@gmail.com"],
-                      subject: `New Contact Inquiry: ${contactSubject}`,
-                      html: `<strong>From:</strong> A visitor<br/><strong>Subject:</strong> ${contactSubject}<br/><br/><strong>Message:</strong><br/>${contactBody}`
-                    })
-                  });
-                  if (res.ok) {
-                    setShowContactModal(false);
-                    setContactSubject("");
-                    setContactBody("");
-                    alert("Inquiry sent successfully!");
-                  } else {
-                    alert("Failed to send inquiry. Please try again.");
-                  }
-                } catch (error) {
-                  alert("Failed to send inquiry.");
-                } finally {
-                  setIsSendingContact(false);
-                }
-              }}>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5 ml-1">Subject</label>
-                  <input required value={contactSubject} onChange={e => setContactSubject(e.target.value)} placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5 ml-1">Body</label>
-                  <textarea required value={contactBody} onChange={e => setContactBody(e.target.value)} rows={4} placeholder="Tell us more about your inquiry..." className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 resize-none"></textarea>
-                </div>
-
-                <button disabled={isSendingContact} type="submit" className="w-full py-3 mt-2 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50">
-                  {isSendingContact ? "Sending..." : "Send Inquiry"}
+      {
+        showContactModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
+              <div className="flex justify-between items-center p-6 border-b border-slate-100 dark:border-slate-800">
+                <h3 className="text-xl font-bold">Contact Us</h3>
+                <button onClick={() => setShowContactModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+                  <span className="material-symbols-outlined">close</span>
                 </button>
-              </form>
+              </div>
+
+              <div className="p-6">
+                <p className="text-sm text-slate-500 mb-6 font-medium">
+                  Need assistance? Call us directly: <a href="tel:+256778512260" className="text-primary font-bold hover:underline">+256 778 512 260</a>
+                </p>
+
+                <form className="space-y-4" onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSendingContact(true);
+                  try {
+                    const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || "http://localhost:3010";
+                    const res = await fetch(`${proxyUrl}/emails`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_RESEND_API_KEY}` },
+                      body: JSON.stringify({
+                        to: ["docuforger@gmail.com"],
+                        subject: `New Contact Inquiry: ${contactSubject}`,
+                        html: `<strong>From:</strong> A visitor<br/><strong>Subject:</strong> ${contactSubject}<br/><br/><strong>Message:</strong><br/>${contactBody}`
+                      })
+                    });
+                    if (res.ok) {
+                      setShowContactModal(false);
+                      setContactSubject("");
+                      setContactBody("");
+                      alert("Inquiry sent successfully!");
+                    } else {
+                      alert("Failed to send inquiry. Please try again.");
+                    }
+                  } catch (error) {
+                    alert("Failed to send inquiry.");
+                  } finally {
+                    setIsSendingContact(false);
+                  }
+                }}>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1">Subject</label>
+                    <input required value={contactSubject} onChange={e => setContactSubject(e.target.value)} placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1">Body</label>
+                    <textarea required value={contactBody} onChange={e => setContactBody(e.target.value)} rows={4} placeholder="Tell us more about your inquiry..." className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 resize-none"></textarea>
+                  </div>
+
+                  <button disabled={isSendingContact} type="submit" className="w-full py-3 mt-2 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50">
+                    {isSendingContact ? "Sending..." : "Send Inquiry"}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Footer */}
       <footer className="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark py-12 px-6">
