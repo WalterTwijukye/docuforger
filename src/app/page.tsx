@@ -9,6 +9,8 @@ export default function LandingPage() {
   const [showDemoModal, setShowDemoModal] = useState(false);
 
   // Form states
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
   const [contactSubject, setContactSubject] = useState("");
   const [contactBody, setContactBody] = useState("");
   const [isSendingContact, setIsSendingContact] = useState(false);
@@ -381,11 +383,13 @@ export default function LandingPage() {
                       body: JSON.stringify({
                         to: ["docuforger@gmail.com"],
                         subject: `New Contact Inquiry: ${contactSubject}`,
-                        html: `<strong>From:</strong> A visitor<br/><strong>Subject:</strong> ${contactSubject}<br/><br/><strong>Message:</strong><br/>${contactBody}`
+                        html: `<strong>From:</strong> ${contactName} (${contactEmail})<br/><strong>Subject:</strong> ${contactSubject}<br/><br/><strong>Message:</strong><br/>${contactBody}`
                       })
                     });
                     if (res.ok) {
                       setShowContactModal(false);
+                      setContactName("");
+                      setContactEmail("");
                       setContactSubject("");
                       setContactBody("");
                       alert("Inquiry sent successfully!");
@@ -399,8 +403,16 @@ export default function LandingPage() {
                   }
                 }}>
                   <div>
-                    <label className="block text-sm font-medium mb-1.5 ml-1">Subject</label>
-                    <input required value={contactSubject} onChange={e => setContactSubject(e.target.value)} placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" />
+                    <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Name</label>
+                    <input required value={contactName} onChange={e => setContactName(e.target.value)} placeholder="Jane Doe" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Email</label>
+                    <input required type="email" value={contactEmail} onChange={e => setContactEmail(e.target.value)} placeholder="jane@example.com" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5 ml-1 text-slate-700 dark:text-slate-300">Subject</label>
+                    <input required value={contactSubject} onChange={e => setContactSubject(e.target.value)} placeholder="How can we help?" className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1.5 ml-1">Body</label>
