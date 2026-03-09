@@ -22,7 +22,9 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
         }
 
-        const checkout = await createCheckout(storeId, variantId, {
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || request.headers.get("origin") || "https://docuforger.vercel.app";
+
+        const checkout = await createCheckout(String(storeId), String(variantId), {
             checkoutOptions: {
                 embed: false,
                 media: true,
@@ -36,15 +38,15 @@ export async function POST(request: Request) {
                 },
             },
             productOptions: {
-                redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?checkout=success`,
+                redirectUrl: `${appUrl}/dashboard?checkout=success`,
                 receiptButtonText: 'Go to Dashboard',
                 receiptThankYouNote: 'Thank you for upgrading to DocuForger Pro!'
             }
         });
 
         if (checkout.error) {
-            console.error("Lemon Squeezy checkout create error:", checkout.error);
-            return NextResponse.json({ error: checkout.error.message }, { status: 500 });
+            console.error("Lemon Squeezy checkout create error full trace:", JSON.stringify(checkout.error));
+            return NextResponse.json({ error: `LemonSqueezy SDK Error: ${checkout.error.message}` }, { status: 500 });
         }
 
         return NextResponse.json({ checkoutUrl: checkout.data?.data.attributes.url });
