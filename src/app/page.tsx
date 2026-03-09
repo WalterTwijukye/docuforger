@@ -185,7 +185,7 @@ export default function LandingPage() {
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold uppercase tracking-widest px-4 py-1 rounded-full">Most Popular</div>
                 <h3 className="text-xl font-bold mb-2 text-primary">Pro</h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-black">$7</span>
+                  <span className="text-4xl font-black">$5</span>
                   <span className="text-slate-500">/mo</span>
                 </div>
                 <ul className="flex flex-col gap-4 mb-8 flex-grow">

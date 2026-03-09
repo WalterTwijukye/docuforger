@@ -16,7 +16,7 @@ const PLAN_LIMITS: Record<string, number> = {
 // Simple mapping of plan to prices
 const PLAN_PRICES: Record<string, string> = {
     "Free": "$0",
-    "Pro": "$7",
+    "Pro": "$5",
     "Enterprise": "Custom",
 };
 
@@ -39,13 +39,13 @@ export default function BillingPage() {
         setIsCheckingOut(true);
 
         try {
-            const res = await fetch("/api/billing/checkout", {
+            const res = await fetch("/api/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    planId: planName,
                     userId: user.$id,
-                    userEmail: user.email,
+                    email: user.email,
+                    name: profile?.name || user.name
                 })
             });
 
@@ -54,9 +54,9 @@ export default function BillingPage() {
                 throw new Error(errorData.error || "Failed to start checkout");
             }
 
-            const { url } = await res.json();
-            if (url) {
-                window.location.href = url; // Redirect to LemonSqueezy checkout
+            const data = await res.json();
+            if (data.checkoutUrl) {
+                window.location.href = data.checkoutUrl; // Redirect to LemonSqueezy checkout
             }
         } catch (error) {
             console.error("Checkout error:", error);

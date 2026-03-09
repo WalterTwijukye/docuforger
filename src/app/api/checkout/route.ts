@@ -1,23 +1,25 @@
 import { NextResponse } from 'next/server';
 import { lemonSqueezySetup, createCheckout } from '@lemonsqueezy/lemonsqueezy.js';
 
-lemonSqueezySetup({
-    apiKey: process.env.LEMONSQUEEZY_API_KEY!,
-});
-
 export async function POST(request: Request) {
     try {
+        const apiKey = process.env.LEMONSQUEEZY_API_KEY;
+        const storeId = process.env.LEMONSQUEEZY_STORE_ID;
+        const variantId = process.env.NEXT_PUBLIC_LEMONSQUEEZY_VARIANT_ID_PRO;
+
+        if (!apiKey || !storeId || !variantId) {
+            console.error("Missing Lemon Squeezy Env Variables!");
+            return NextResponse.json({ error: 'Lemon Squeezy credentials missing in Vercel environment variables.' }, { status: 500 });
+        }
+
+        lemonSqueezySetup({
+            apiKey: apiKey,
+        });
+
         const { userId, email, name } = await request.json();
 
         if (!userId) {
             return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
-        }
-
-        const storeId = process.env.LEMONSQUEEZY_STORE_ID;
-        const variantId = process.env.NEXT_PUBLIC_LEMONSQUEEZY_VARIANT_ID_PRO;
-
-        if (!storeId || !variantId) {
-            return NextResponse.json({ error: 'Lemon Squeezy credentials missing in environment variables.' }, { status: 500 });
         }
 
         const checkout = await createCheckout(storeId, variantId, {
