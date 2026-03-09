@@ -25,13 +25,17 @@ export default function Sidebar() {
                 </div>
                 <div>
                     <h1 className="text-slate-900 dark:text-white font-bold text-lg leading-none">DocuForger</h1>
-                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium">Pro Workspace</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1 capitalize">
+                        {typedProfile?.plan === "pro" ? "Pro Workspace" : "Free Tier"}
+                    </p>
                 </div>
             </div>
 
             <nav className="flex-1 px-4 space-y-1 overflow-y-auto">
                 {navItems.map((item) => {
-                    const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                    const isActive = item.href === '/dashboard'
+                        ? pathname === '/dashboard'
+                        : pathname === item.href || pathname.startsWith(`${item.href}/`);
                     return (
                         <Link
                             key={item.name}
