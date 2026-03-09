@@ -57,46 +57,7 @@ function DashboardContent() {
         fetchDashboardData();
     }, [user]);
 
-    // Handle Intent = Pro checkout auto-trigger
-    useEffect(() => {
-        if (!user || !profile) return;
 
-        const intent = searchParams?.get('intent');
-        const userPlan = (profile as any).plan || 'free';
-
-        if (intent === 'pro' && userPlan !== 'pro' && userPlan !== 'business') {
-            setIsLoadingStats(true); // Re-use loading state to hide UI temporarily
-            const initiateCheckout = async () => {
-                try {
-                    const res = await fetch('/api/checkout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            userId: user.$id,
-                            email: user.email,
-                            name: (profile as any).name || user.name
-                        })
-                    });
-
-                    if (res.ok) {
-                        const data = await res.json();
-                        if (data.checkoutUrl) {
-                            window.location.href = data.checkoutUrl;
-                            return;
-                        }
-                    }
-                    // If it fails, remove the intent so we don't infinitely retry and show dashboard
-                    router.replace(pathname || '/dashboard');
-                } catch (error) {
-                    console.error("Auto-checkout failed", error);
-                    router.replace(pathname || '/dashboard');
-                } finally {
-                    setIsLoadingStats(false);
-                }
-            };
-            initiateCheckout();
-        }
-    }, [user, profile, searchParams, pathname, router]);
 
     const handleActionStandardTemplate = async (templateData: any, action: 'preview' | 'generate') => {
         if (!user) return;

@@ -22,7 +22,7 @@ function SignupContent() {
         try {
             // We use window.location.origin to dynamically get the current URL (e.g., http://localhost:3000)
             const successUrl = intent === 'pro'
-                ? `${window.location.origin}/dashboard?intent=pro`
+                ? `${window.location.origin}/dashboard/billing`
                 : `${window.location.origin}/dashboard`;
 
             account.createOAuth2Session(
@@ -58,7 +58,7 @@ function SignupContent() {
 
             // Redirect to dashboard (AuthProvider will handle state refresh transparently)
             if (intent === 'pro') {
-                window.location.href = "/dashboard?intent=pro";
+                window.location.href = "/dashboard/billing";
             } else {
                 window.location.href = "/dashboard";
             }

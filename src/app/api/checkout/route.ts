@@ -29,6 +29,7 @@ export async function POST(request: Request) {
                 embed: false,
                 media: true,
                 logo: true,
+                dark: true,
             },
             checkoutData: {
                 email: email,

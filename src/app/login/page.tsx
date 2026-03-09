@@ -25,7 +25,7 @@ function LoginContent() {
             await account.createEmailPasswordSession(email, password);
             // Redirect to dashboard (AuthProvider handles session context refresh)
             if (intent === 'pro') {
-                window.location.href = "/dashboard?intent=pro";
+                window.location.href = "/dashboard/billing";
             } else {
                 window.location.href = "/dashboard";
             }
@@ -41,7 +41,7 @@ function LoginContent() {
 
         try {
             const successUrl = intent === 'pro'
-                ? `${window.location.origin}/dashboard?intent=pro`
+                ? `${window.location.origin}/dashboard/billing`
                 : `${window.location.origin}/dashboard`;
 
             account.createOAuth2Session(
