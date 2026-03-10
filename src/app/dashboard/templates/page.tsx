@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/components/AuthProvider";
+import { useAuth, CustomProfile } from "@/components/AuthProvider";
 import { databases, DATABASE_ID, COL_TEMPLATES } from "@/lib/appwrite";
 import { Query } from "appwrite";
 
 export default function TemplatesPage() {
-    const { user } = useAuth();
+    const { user, profile } = useAuth();
+    const typedProfile = profile as CustomProfile | null;
+    const userPlan = typedProfile?.plan || 'Free';
     const [activeTab, setActiveTab] = useState("all");
     const [templates, setTemplates] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -50,6 +52,8 @@ export default function TemplatesPage() {
         return true;
     });
 
+    const isLimitReached = userPlan === 'Free' && templates.length >= 1;
+
     return (
         <div className="flex flex-col h-full min-w-0 bg-background-light dark:bg-background-dark overflow-hidden">
             {/* Header */}
@@ -66,10 +70,17 @@ export default function TemplatesPage() {
                     </div>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3 pl-2">
-                    <Link href="/editor/new" className="flex items-center gap-2 bg-primary text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors shrink-0">
-                        <span className="material-symbols-outlined text-lg">add</span>
-                        <span className="hidden sm:inline">New Template</span>
-                    </Link>
+                    {isLimitReached ? (
+                        <button onClick={() => alert("Free plan is limited to 1 active template. Please upgrade to Pro to create unlimited templates.")} className="flex items-center gap-2 bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed px-3 sm:px-4 py-2 rounded-lg text-sm font-bold shrink-0">
+                            <span className="material-symbols-outlined text-lg">add</span>
+                            <span className="hidden sm:inline">New Template</span>
+                        </button>
+                    ) : (
+                        <Link href="/editor/new" className="flex items-center gap-2 bg-primary text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors shrink-0">
+                            <span className="material-symbols-outlined text-lg">add</span>
+                            <span className="hidden sm:inline">New Template</span>
+                        </Link>
+                    )}
                 </div>
             </header>
 

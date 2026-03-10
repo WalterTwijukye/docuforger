@@ -170,7 +170,7 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-center gap-2 text-sm text-slate-500">
                     <span className="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">check_circle</span>
-                    Standard templates
+                    1 active template
                   </li>
                   <li className="flex items-center gap-2 text-sm text-slate-500">
                     <span className="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">check_circle</span>
