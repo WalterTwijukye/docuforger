@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Document, Packer, Paragraph } from "docx";
 import { useAuth } from "@/components/AuthProvider";
 import { databases, storage, DATABASE_ID, COL_DOCUMENTS, COL_TEMPLATES, BUCKET_DOCUMENTS } from "@/lib/appwrite";
 import { Query } from "appwrite";
@@ -10,7 +11,7 @@ export default function DocumentsPage() {
     const { user } = useAuth();
     const [activeTab, setActiveTab] = useState("all");
     const [documents, setDocuments] = useState<any[]>([]);
-    const [templateMap, setTemplateMap] = useState<Record<string, string>>({});
+    const [templateMap, setTemplateMap] = useState<Record<string, { name: string, content: string }>>({});
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchDocuments = async () => {
@@ -30,8 +31,8 @@ export default function DocumentsPage() {
                     const tRes = await databases.listDocuments(DATABASE_ID, COL_TEMPLATES, [
                         Query.equal("$id", tIds)
                     ]);
-                    const tMap: Record<string, string> = {};
-                    tRes.documents.forEach(t => { tMap[t.$id] = t.name; });
+                    const tMap: Record<string, { name: string, content: string }> = {};
+                    tRes.documents.forEach(t => { tMap[t.$id] = { name: t.name, content: t.content }; });
                     setTemplateMap(tMap);
                 } catch (e) {
                     console.error("Failed to fetch template names", e);
@@ -58,6 +59,43 @@ export default function DocumentsPage() {
             setDocuments(prev => prev.filter(d => d.$id !== id));
         } catch (error) {
             console.error("Failed to delete document:", error);
+        }
+    };
+
+    const handleDownloadWord = async (doc: any) => {
+        const template = templateMap[doc.templateId];
+        if (!template || !template.content) {
+            alert("Original template content not available. Cannot generate Word document.");
+            return;
+        }
+
+        let generatedContent = template.content;
+        try {
+            const formData = JSON.parse(doc.variables || "{}");
+            Object.entries(formData).forEach(([key, value]) => {
+                const regex = new RegExp(`\\{\\{${key}\\}\\}`, 'g');
+                generatedContent = generatedContent.replace(regex, value as string);
+            });
+
+            const docxFile = new Document({
+                sections: [{
+                    properties: {},
+                    children: generatedContent.split('\n').map((text: string) => new Paragraph({ text })),
+                }],
+            });
+
+            const blob = await Packer.toBlob(docxFile);
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${doc.title || 'Document'}.docx`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Failed to generate Word document:", error);
+            alert("Error generating Word document.");
         }
     };
 
@@ -160,7 +198,7 @@ export default function DocumentsPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-primary truncate max-w-[150px]">
-                                                {doc.templateId ? templateMap[doc.templateId] || "Unknown Template" : "Custom"}
+                                                {doc.templateId && templateMap[doc.templateId] ? templateMap[doc.templateId].name : "Custom"}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
@@ -170,19 +208,26 @@ export default function DocumentsPage() {
                                             <div className="flex items-center justify-end gap-1">
                                                 <button
                                                     className="p-2 text-slate-400 hover:text-primary transition-colors"
-                                                    title="Preview Preview"
+                                                    title="Preview PDF"
                                                     onClick={() => window.open(storage.getFileView(BUCKET_DOCUMENTS, doc.fileId).toString(), '_blank')}
                                                     disabled={!doc.fileId}
                                                 >
                                                     <span className="material-symbols-outlined text-[20px]">visibility</span>
                                                 </button>
                                                 <button
-                                                    className="p-2 text-slate-400 hover:text-primary transition-colors"
-                                                    title="Download Document"
+                                                    className="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                                                    title="Download PDF"
                                                     onClick={() => window.open(storage.getFileDownload(BUCKET_DOCUMENTS, doc.fileId).toString(), '_blank')}
                                                     disabled={!doc.fileId}
                                                 >
-                                                    <span className="material-symbols-outlined text-[20px]">download</span>
+                                                    <span className="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                                                </button>
+                                                <button
+                                                    className="p-2 text-slate-400 hover:text-blue-500 transition-colors"
+                                                    title="Download Word (.docx)"
+                                                    onClick={() => handleDownloadWord(doc)}
+                                                >
+                                                    <span className="material-symbols-outlined text-[20px]">description</span>
                                                 </button>
                                                 <Link
                                                     href={`/dashboard/templates/${doc.templateId}/generate`}
