@@ -91,37 +91,8 @@ export default function SettingsPage() {
         }
     };
 
-    const handleUpgrade = async () => {
-        setIsCheckoutLoading(true);
-        setToastMessage(null);
-        try {
-            const res = await fetch('/api/checkout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userId: user?.$id,
-                    email: user?.email,
-                    name: profile?.name || user?.name
-                })
-            });
-
-            if (!res.ok) {
-                const errorData = await res.json();
-                throw new Error(errorData.error || 'Failed to create checkout');
-            }
-
-            const data = await res.json();
-            if (data.checkoutUrl) {
-                window.location.href = data.checkoutUrl;
-            } else {
-                throw new Error("No checkout URL returned");
-            }
-        } catch (error: any) {
-            console.error("Checkout error:", error);
-            setToastMessage(error.message || "Something went wrong initiating checkout.");
-        } finally {
-            setIsCheckoutLoading(false);
-        }
+    const handleUpgrade = () => {
+        window.location.href = '/dashboard/billing';
     };
 
     return (
@@ -267,14 +238,12 @@ export default function SettingsPage() {
                             )}
 
                             {(profile?.plan === 'pro' || profile?.plan === 'business') && (
-                                <a
-                                    href="https://app.lemonsqueezy.com/my-orders"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <button
                                     className="w-full flex items-center justify-center px-4 py-2 mt-2 text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all shadow-sm"
+                                    onClick={() => window.location.href = '/dashboard/billing'}
                                 >
                                     Manage Billing
-                                </a>
+                                </button>
                             )}
                         </div>
                     </div>
