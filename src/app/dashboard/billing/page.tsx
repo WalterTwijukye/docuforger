@@ -39,8 +39,7 @@ export default function BillingPage() {
         clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "sb",
         currency: "USD",
         intent: "subscription",
-        vault: true,
-        components: "buttons",
+        components: "buttons", // Removed vault: true which conflicts with Advanced Credit Cards
     };
 
     const createSubscription = (data: any, actions: any) => {
