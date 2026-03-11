@@ -66,7 +66,7 @@ export default function GenerateDocumentPage() {
 
     const handleGenerate = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!user || !template || !profile) return;
+        if (!user || !template) return;
 
         setIsGenerating(true);
         try {
@@ -79,9 +79,9 @@ export default function GenerateDocumentPage() {
 
             const usageDoc = usageRes.documents.length > 0 ? usageRes.documents[0] : null;
             const currentDocs = usageDoc ? usageDoc.documentsCount : 0;
-            const userPlan = (profile as any).plan || 'free';
+            const userPlan = profile ? (profile as any).plan : 'Free';
 
-            if (userPlan === 'free' && currentDocs >= 3) {
+            if ((userPlan === 'Free' || userPlan === 'free') && currentDocs >= 3) {
                 alert("You have reached your free plan limit of 3 documents per month. Please upgrade to Pro to generate unlimited documents.");
                 router.push('/dashboard/settings');
                 setIsGenerating(false);
