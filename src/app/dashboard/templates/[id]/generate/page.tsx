@@ -253,17 +253,17 @@ export default function GenerateDocumentPage() {
                     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
                         <h3 className="font-bold text-slate-900 dark:text-white mb-4">Document Details</h3>
                         <div className="space-y-4 text-sm">
-                            <div className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-slate-800">
-                                <span className="text-slate-500">Template</span>
-                                <span className="font-semibold text-slate-900 dark:text-white text-right max-w-[150px] truncate" title={template.name}>{template.name}</span>
+                            <div className="flex justify-between items-center gap-4 py-2 border-b border-slate-100 dark:border-slate-800 overflow-hidden">
+                                <span className="text-slate-500 whitespace-nowrap shrink-0">Template</span>
+                                <span className="font-semibold text-slate-900 dark:text-white text-right truncate" title={template.name}>{template.name}</span>
                             </div>
-                            <div className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-slate-800">
-                                <span className="text-slate-500">Format</span>
-                                <span className="font-semibold text-slate-900 dark:text-white text-right">PDF</span>
+                            <div className="flex justify-between items-center gap-4 py-2 border-b border-slate-100 dark:border-slate-800 overflow-hidden">
+                                <span className="text-slate-500 whitespace-nowrap shrink-0">Format</span>
+                                <span className="font-semibold text-slate-900 dark:text-white text-right truncate">PDF</span>
                             </div>
-                            <div className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-slate-800">
-                                <span className="text-slate-500">Variables</span>
-                                <span className="font-semibold text-primary px-2 py-0.5 bg-primary/10 rounded-full">{variables.length} Required</span>
+                            <div className="flex justify-between items-center gap-4 py-2 border-b border-slate-100 dark:border-slate-800 overflow-hidden">
+                                <span className="text-slate-500 whitespace-nowrap shrink-0">Variables</span>
+                                <span className="font-semibold text-primary px-2 py-0.5 bg-primary/10 rounded-full shrink-0">{variables.length} Required</span>
                             </div>
                         </div>
 
