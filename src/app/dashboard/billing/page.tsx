@@ -117,32 +117,6 @@ export default function BillingPage() {
                                 Cancel Subscription
                             </button>
                         )}
-                        {currentPlan === "Free" && (
-                            <div className="flex flex-col gap-2 w-full max-w-[250px]">
-                                <PayPalButtons
-                                    fundingSource="paypal"
-                                    createSubscription={createSubscription}
-                                    onApprove={onApprove}
-                                    style={{
-                                        shape: "pill",
-                                        color: "gold",
-                                        label: "subscribe",
-                                        height: 38
-                                    }}
-                                />
-                                <PayPalButtons
-                                    fundingSource="card"
-                                    createSubscription={createSubscription}
-                                    onApprove={onApprove}
-                                    style={{
-                                        shape: "pill",
-                                        color: "black",
-                                        label: "subscribe",
-                                        height: 38
-                                    }}
-                                />
-                            </div>
-                        )}
                     </div>
                 </div>
 
@@ -193,57 +167,10 @@ export default function BillingPage() {
                             </div>
                         </div>
 
-                        {/* Billing History (Placeholder for Lemon Squeezy integration) */}
-                        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden opacity-50 relative">
-                            <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                                <span className="bg-white/80 dark:bg-slate-900/80 px-4 py-2 rounded-lg font-bold text-sm shadow-sm border border-slate-200 dark:border-slate-800 backdrop-blur-sm">Integration Coming Soon</span>
-                            </div>
-                            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center blur-sm">
-                                <h3 className="font-bold text-slate-900 dark:text-white">Billing History</h3>
-                                <button className="text-primary text-sm font-semibold hover:underline">Download All</button>
-                            </div>
-                            <div className="overflow-x-auto blur-sm">
-                                <table className="w-full text-left">
-                                    <thead>
-                                        <tr className="bg-slate-50 dark:bg-slate-800/50">
-                                            <th className="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Date</th>
-                                            <th className="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Amount</th>
-                                            <th className="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
-                                            <th className="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Invoice</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="px-6 py-4 text-sm font-medium">Oct 24, 2023</td>
-                                            <td className="px-6 py-4 text-sm">$7.00</td>
-                                            <td className="px-6 py-4 text-sm">
-                                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Paid</span>
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-right">PDF</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
 
-                    {/* Right Column: Payment & Methods */}
+                    {/* Right Column: Upgrade Promo */}
                     <div className="space-y-6">
-                        {/* Payment Method */}
-                        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 opacity-50 relative">
-                            <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                                <span className="bg-white/80 dark:bg-slate-900/80 px-4 py-2 rounded-lg font-bold text-sm shadow-sm border border-slate-200 dark:border-slate-800 backdrop-blur-sm">Managed via Lemon Squeezy</span>
-                            </div>
-                            <h3 className="font-bold text-slate-900 dark:text-white mb-4 blur-sm">Payment Method</h3>
-                            <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex items-center justify-between mb-4 blur-sm">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-8 bg-slate-100 dark:bg-slate-800 rounded outline-none border border-slate-200 dark:border-slate-700"></div>
-                                    <div>
-                                        <p className="text-sm font-bold text-slate-900 dark:text-white">Visa ending in ****</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         {/* Upgrade Promo */}
                         {currentPlan !== "Enterprise" && (
