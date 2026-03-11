@@ -192,17 +192,6 @@ export default function BillingPage() {
                                                 height: 40
                                             }}
                                         />
-                                        <PayPalButtons
-                                            fundingSource="card"
-                                            createSubscription={createSubscription}
-                                            onApprove={onApprove}
-                                            style={{
-                                                shape: "pill",
-                                                color: "black",
-                                                label: "subscribe",
-                                                height: 40
-                                            }}
-                                        />
                                     </div>
                                 </div>
                                 {/* Abstract decoration */}
