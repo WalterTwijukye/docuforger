@@ -40,6 +40,7 @@ export default function BillingPage() {
         currency: "USD",
         intent: "subscription",
         vault: true,
+        components: "buttons",
     };
 
     const createSubscription = (data: any, actions: any) => {
@@ -117,16 +118,27 @@ export default function BillingPage() {
                             </button>
                         )}
                         {currentPlan === "Free" && (
-                            <div className="w-[150px] overflow-hidden rounded-xl">
+                            <div className="flex flex-col gap-2 w-full max-w-[250px]">
                                 <PayPalButtons
+                                    fundingSource="paypal"
                                     createSubscription={createSubscription}
                                     onApprove={onApprove}
                                     style={{
                                         shape: "pill",
                                         color: "gold",
-                                        layout: "horizontal",
                                         label: "subscribe",
-                                        height: 36 // Match the height of the sibling button roughly
+                                        height: 38
+                                    }}
+                                />
+                                <PayPalButtons
+                                    fundingSource="card"
+                                    createSubscription={createSubscription}
+                                    onApprove={onApprove}
+                                    style={{
+                                        shape: "pill",
+                                        color: "black",
+                                        label: "subscribe",
+                                        height: 38
                                     }}
                                 />
                             </div>
@@ -236,15 +248,35 @@ export default function BillingPage() {
                         {/* Upgrade Promo */}
                         {currentPlan !== "Enterprise" && (
                             <div className="bg-gradient-to-br from-primary to-blue-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                                <div className="relative z-10">
-                                    <h4 className="text-lg font-bold mb-2 leading-tight">Need more capacity?</h4>
-                                    <p className="text-white/80 text-sm mb-6">Upgrade to our Pro or Enterprise plan for unlimited documents, custom templates, and more.</p>
-                                    <button
-                                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                        className="w-full bg-white text-primary font-bold py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                                    >
-                                        Subscribe Now
-                                    </button>
+                                <div className="relative z-10 space-y-4">
+                                    <div>
+                                        <h4 className="text-lg font-bold mb-2 leading-tight">Need more capacity?</h4>
+                                        <p className="text-white/80 text-sm">Upgrade to our Pro or Enterprise plan for unlimited documents, custom templates, and more.</p>
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <PayPalButtons
+                                            fundingSource="paypal"
+                                            createSubscription={createSubscription}
+                                            onApprove={onApprove}
+                                            style={{
+                                                shape: "pill",
+                                                color: "gold",
+                                                label: "subscribe",
+                                                height: 40
+                                            }}
+                                        />
+                                        <PayPalButtons
+                                            fundingSource="card"
+                                            createSubscription={createSubscription}
+                                            onApprove={onApprove}
+                                            style={{
+                                                shape: "pill",
+                                                color: "black",
+                                                label: "subscribe",
+                                                height: 40
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                                 {/* Abstract decoration */}
                                 <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
