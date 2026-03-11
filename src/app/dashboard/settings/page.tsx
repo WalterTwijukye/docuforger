@@ -2,11 +2,13 @@
 
 import { useAuth } from "@/components/AuthProvider";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { account, databases, storage, DATABASE_ID, COL_PROFILES, BUCKET_FILES } from "@/lib/appwrite";
 import { ID } from "appwrite";
 
 export default function SettingsPage() {
     const { user, profile } = useAuth();
+    const router = useRouter();
 
     // Form state
     const [firstName, setFirstName] = useState("");
@@ -92,7 +94,7 @@ export default function SettingsPage() {
     };
 
     const handleUpgrade = () => {
-        window.location.href = '/dashboard/billing';
+        router.push('/dashboard/billing');
     };
 
     return (
@@ -240,7 +242,7 @@ export default function SettingsPage() {
                             {(profile?.plan === 'pro' || profile?.plan === 'business') && (
                                 <button
                                     className="w-full flex items-center justify-center px-4 py-2 mt-2 text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all shadow-sm"
-                                    onClick={() => window.location.href = '/dashboard/billing'}
+                                    onClick={() => router.push('/dashboard/billing')}
                                 >
                                     Manage Billing
                                 </button>
