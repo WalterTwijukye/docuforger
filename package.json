@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
-    "@paypal/react-paypal-js": "^9.0.1",
     "appwrite": "^22.4.1",
     "crypto": "^1.0.1",
     "docx": "^9.6.0",
