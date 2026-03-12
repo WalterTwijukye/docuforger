@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
+    "@paddle/paddle-js": "^1.6.2",
+    "@paddle/paddle-node-sdk": "^3.6.0",
     "appwrite": "^22.4.1",
     "crypto": "^1.0.1",
     "docx": "^9.6.0",
