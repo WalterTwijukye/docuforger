@@ -54,7 +54,7 @@ export default function LandingPage() {
                   Automate Your Documents in <span className="text-primary">Seconds</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-lg">
-                  Stop manual copy-pasting. Generate professional PDFs and Word documents in under 30 seconds with our powerful automation engine.
+                  Standardize your company's documents effortlessly. Create dynamic templates from contracts, invoices, receipts or letters with custom variables, and empower your team to generate perfect, consistent Docx or PDFs every time without touching a word processor.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
