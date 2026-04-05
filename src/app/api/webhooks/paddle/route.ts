@@ -4,7 +4,7 @@ import { databases, DATABASE_ID, COL_PROFILES } from '@/lib/appwrite';
 
 // Initialize the Paddle server SDK
 const paddle = new Paddle(process.env.PADDLE_API_KEY || 'test_api_key', {
-    environment: process.env.NODE_ENV === 'production' ? Environment.production : Environment.sandbox,
+    environment: Environment.production,
     logLevel: LogLevel.verbose,
 });
 
