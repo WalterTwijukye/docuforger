@@ -28,8 +28,8 @@ export default function LandingPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "DocuForger",
-            "alternateName": ["DocuForge"],
+            "name": "Docuforger",
+            "alternateName": ["Docuforge"],
             "url": "https://docuforger.vercel.app/"
           })
         }}
@@ -39,7 +39,7 @@ export default function LandingPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary text-3xl">description</span>
-            <span className="text-xl font-bold tracking-tight">DocuForger</span>
+            <span className="text-xl font-bold tracking-tight">Docuforger</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link className="text-sm font-medium hover:text-primary transition-colors" href="#features">Features</Link>

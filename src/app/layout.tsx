@@ -9,10 +9,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DocuForger | Automate Your Documents in Seconds",
+  title: "Docuforger | Automate Your Documents in Seconds",
   description: "Stop manual copy-pasting. Generate professional PDFs and Word documents in under 30 seconds with our powerful automation engine.",
   openGraph: {
-    siteName: "DocuForger",
+    siteName: "Docuforger",
   },
   verification: {
     google: "RZklUDpRhCbwQ8td7n8XVrR-d_WY0TZsJCBTlRcAqC0",
