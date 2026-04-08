@@ -125,6 +125,10 @@ export default function BillingPage() {
                     <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">Billing &amp; Subscription</h2>
                     <p className="text-slate-500 dark:text-slate-400 mt-1">Manage your plan, usage, and billing information.</p>
                 </div>
+                {/* 
+                   Subscription Actions:
+                   Only show the cancel button if the user is actively on a Pro or Enterprise plan 
+                */}
                 <div className="flex gap-3">
                     {currentPlan !== "Free" && (
                         <button className="px-4 py-2 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">

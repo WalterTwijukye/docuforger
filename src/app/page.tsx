@@ -61,6 +61,11 @@ export default function LandingPage() {
                 <Link href="/signup" className="flex items-center justify-center bg-primary text-white text-lg font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20">
                   Get Started for Free
                 </Link>
+                {/* 
+                  Video Modal Trigger: 
+                  Opens a full-screen overlay displaying the product demonstration video 
+                  located in the /public/assets folder.
+                */}
                 <button onClick={() => setShowVideoModal(true)} className="flex items-center justify-center gap-2 border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
                   <span className="material-symbols-outlined text-primary">play_circle</span>
                   See how it works
